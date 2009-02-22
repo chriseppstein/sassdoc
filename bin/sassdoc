@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# The sassdoc command line utility
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'exec'))
+
+SassDoc::Exec.new(ARGV).run!
