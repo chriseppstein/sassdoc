@@ -11,7 +11,12 @@ module SassDoc
     def process_arguments!
        option_parser = OptionParser.new do |opts|
          opts.on("--compass") do
-           require 'compass'
+           begin
+             require 'compass'
+           rescue LoadError
+             require 'rubygems'
+             require 'compass'
+           end
            @options[:compass] = true
          end
        end
