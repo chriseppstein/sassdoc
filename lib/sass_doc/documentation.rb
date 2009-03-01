@@ -25,11 +25,11 @@ private
         end
       end
     end
- 
+
     def raw_lines(node, options = {})
       indent = options[:indent]||0
       lines = []
-      line = " "*[indent,0].max
+      line = "  "*[indent,0].max
       line << if node.respond_to?(:value)
         node.value
       elsif node.respond_to?(:text)
