@@ -16,6 +16,14 @@ Example
 -------
 
     //**
+      The odd row color for a table
+    !odd_row_color = red
+
+    //**
+      The even row color for a table
+    !even_row_color = blue
+
+    //**
       Sets background colors for a table so that rows and columns alternate and are shaded
       correctly.
       @parameter even_row_color
@@ -50,3 +58,12 @@ Example Output (Plain Text)
       The color of the header.
     Parameter: footer_color (default value: white)
       The color of the footer.
+
+    Variable: !odd_row_color
+    -------------------------
+    The odd row color for a table
+
+
+    Variable: !even_row_color
+    --------------------------
+    The even row color for a table
