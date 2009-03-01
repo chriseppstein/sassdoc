@@ -11,7 +11,7 @@ module SassDoc
 
     def to_plain_text
       sig = signature
-      separator = "-" * (sig.length + 11)
+      separator = "-" * (sig.length + 10)
       lines = ["Variable: #{sig}"]
       if (doc = general_doc).length > 0
         lines += [
