@@ -27,7 +27,7 @@ module SassDoc
         if @arguments.size > 1
           puts "File: #{file}"
         end
-        parser = SassDoc::MixinParser.new(file, @options)
+        parser = SassDoc::SassDocParser.new(file, @options)
         puts parser.parse!.to_plain_text
       end
     end
