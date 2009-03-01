@@ -1,4 +1,5 @@
-require File.join(File.dirname(__FILE__), "mixins")
+require File.join(File.dirname(__FILE__), "sass_doc", "mixins")
+require File.join(File.dirname(__FILE__), "sass_extensions")
 
 module SassDoc
   class SassDocParser

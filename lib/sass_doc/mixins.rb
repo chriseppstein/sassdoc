@@ -1,5 +1,3 @@
-require File.join(File.dirname(__FILE__), "sass_extensions")
-
 module SassDoc
   class Mixin < Struct.new(:node, :comment)
 
