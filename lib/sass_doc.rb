@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), "sass_extensions")
 
+require File.join(File.dirname(__FILE__), "sass_doc", "documentation")
 require File.join(File.dirname(__FILE__), "sass_doc", "mixin_documentation")
 #require File.join(File.dirname(__FILE__), "sass_doc", "file_documentation")
 require File.join(File.dirname(__FILE__), "sass_doc", "variable_documentation")
@@ -51,7 +52,7 @@ module SassDoc
     end
 
     def to_plain_text
-      output = @mixins.map{|doc| doc.to_plain_text}.join("\n\n")
+      output = @mixins.map{|mixin| mixin.to_plain_text}.join("\n\n")
       output += "\n\n" + @variables.map{|variable| variable.to_plain_text}.join("\n\n")
     end
   end
