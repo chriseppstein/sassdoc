@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), "sass_extensions")
 
 require File.join(File.dirname(__FILE__), "sass_doc", "documentation")
 require File.join(File.dirname(__FILE__), "sass_doc", "mixin_documentation")
-#require File.join(File.dirname(__FILE__), "sass_doc", "file_documentation")
+require File.join(File.dirname(__FILE__), "sass_doc", "file_documentation")
 require File.join(File.dirname(__FILE__), "sass_doc", "variable_documentation")
 
 module SassDoc
@@ -16,7 +16,7 @@ module SassDoc
       @contents = File.open(filename) do |f|
         f.read
       end
-      #@file_comments = []
+      @file_documentation = nil
       @mixins = []
       @variables = []
     end
@@ -30,11 +30,12 @@ module SassDoc
       engine_options.merge(@options)
       (engine_options[:load_paths] ||= []) << File.dirname(filename)
       @ast = Sass::Engine.new(@contents, engine_options).send :render_to_tree
+      file_comments = []
       prev_child = nil
       @ast.children.each do |child|
         if child.is_a?(Sass::Tree::CommentNode) and child.value =~ /^\*\*+\\\\/
           comment = child
-          #@file_comments << FileComment.new(comment)
+          file_comments << comment
         elsif child.is_a? Sass::Tree::VariableNode
           comment = if prev_child.is_a?(Sass::Tree::CommentNode)
             prev_child
@@ -48,11 +49,13 @@ module SassDoc
         end
         prev_child = child
       end
+      @file_documentation = FileDocumentation.new(nil, file_comments)
       self
     end
 
     def to_plain_text
-      output = @mixins.map{|mixin| mixin.to_plain_text}.join("\n\n")
+      output = @file_documentation.to_plain_text
+      output += "\n\n" + @mixins.map{|mixin| mixin.to_plain_text}.join("\n\n")
       output += "\n\n" + @variables.map{|variable| variable.to_plain_text}.join("\n\n")
     end
   end

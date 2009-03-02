@@ -14,9 +14,9 @@ module SassDoc
       @general_doc
     end
 
-private 
+protected
 
-    def raw_documentation
+    def raw_documentation(comment = self.comment)
       @raw_documentation ||= begin
         unless comment && comment.value =~ /^\*\*+/
           []
@@ -25,6 +25,8 @@ private
         end
       end
     end
+
+private
 
     def raw_lines(node, options = {})
       indent = options[:indent]||0
@@ -37,7 +39,7 @@ private
       else
         ""
       end
-      line = line.sub(/^\*\*+ */,'').strip if options[:first]
+      line = line.sub(/^\*\*+(\\\\)? */,'').strip if options[:first]
       lines << line unless line.length == 0
       node.children.each do |child|
         lines += raw_lines(child, :indent => indent + 1)
