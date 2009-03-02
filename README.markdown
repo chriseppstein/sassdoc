@@ -15,6 +15,9 @@ Parameters are documented with an `@parameter` declaration and the value of the 
 Example
 -------
 
+    //**\\
+      This file handles how to handle the styles of tables.
+
     //**
       The odd row color for a table
     !odd_row_color = red
@@ -43,6 +46,10 @@ Example
 Example Output (Plain Text)
 ---------------------------
 
+    File: FileName
+    --------------
+    This file handles how to handle the styles of tables.
+
     Mixin: +alternating-rows-and-columns(even_row_color, odd_row_color, dark_intersection[, header_color, footer_color])
     --------------------------------------------------------------------------------------------------------------------
     Sets background colors for a table so that rows and columns alternate and are shaded
@@ -62,7 +69,6 @@ Example Output (Plain Text)
     Variable: !odd_row_color
     -------------------------
     The odd row color for a table
-
 
     Variable: !even_row_color
     --------------------------

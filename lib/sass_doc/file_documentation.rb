@@ -14,14 +14,6 @@ module SassDoc
       name
     end
 
-    def raw_documentation
-      raw_file_documentation = []
-      @comments.each {|comment|
-        raw_file_documentation += super(comment)
-      }
-      raw_file_documentation
-    end
-
     def to_plain_text
       sig = signature
       separator = "-" * (sig.length + 6)
@@ -35,5 +27,22 @@ module SassDoc
       end
       lines.join("\n")
     end
+
+protected
+
+    def raw_documentation
+      @raw_documentation ||= begin
+        raw_documentation = []
+        @comments.each {|comment|
+          unless comment && comment.value =~ /^\*\*+\\\\/
+            []
+          else
+            raw_documentation += raw_lines(comment, :first => true, :indent => -1)
+          end
+        }
+        raw_documentation
+      end
+    end
+
   end
 end

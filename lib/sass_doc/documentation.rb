@@ -16,7 +16,7 @@ module SassDoc
 
 protected
 
-    def raw_documentation(comment = self.comment)
+    def raw_documentation
       @raw_documentation ||= begin
         unless comment && comment.value =~ /^\*\*+/
           []
